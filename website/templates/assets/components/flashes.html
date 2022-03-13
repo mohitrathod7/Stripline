@@ -1,0 +1,40 @@
+{% macro flashSuccess() %}
+    {% with success = get_flashed_messages(category_filter=["success"]) %}
+        {% if success %}
+            {% for msg in success %}
+                <div class="flash flash__success">
+                    <p class="flash-text">{{ msg }}</p>
+                    <div class="progress"></div>
+                </div>  
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
+{% endmacro %}
+
+
+{% macro flashError() %}
+    {% with errors = get_flashed_messages(category_filter=["error"]) %}
+        {% if errors %}
+            {% for msg in errors %}
+                <div class="flash flash__error">
+                    <p class="flash-text">{{ msg }}</p>
+                    <div class="progress"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endmacro %}
+
+
+{% macro flashInfo() %}
+    {% with errors = get_flashed_messages(category_filter=["info"]) %}
+        {% if errors %}
+            {% for msg in errors %}
+                <div class="flash flash__info">
+                    {{ msg }}
+                    <div class="progress"></div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+{% endmacro %}

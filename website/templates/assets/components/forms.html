@@ -1,0 +1,50 @@
+{% macro text(label, id, icon, required) %}
+<div class="md-group">      
+    <input class="md-input__text" id="{{id}}" name="{{id}}" type="text" autocomplete="off" required="{{required}}">
+    <span class="md-input__border"></span>
+    {% if icon.lower()=="" or icon.lower()=="none" or icon.lower()=="no" %}
+        <label class="md-input__label"><i class="fa hide"></i>{{label}}</label>
+    {% else %}
+        <label class="md-input__label"><i class="fa fa-{{icon}}"></i>{{label}}</label>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro password(label, id, icon, required) %}
+<div class="md-group">      
+    <input class="md-input__text" id="{{id}}" name="{{id}}" type="password" autocomplete="off" required="{{required}}">
+    <span class="md-input__border"></span>
+    {% if icon.lower()=="" or icon.lower()=="none" or icon.lower()=="no" %}
+        <label class="md-input__label"><i class="fa hide"></i>{{label}}</label>
+    {% else %}
+        <label class="md-input__label"><i class="fa fa-{{icon}}"></i>{{label}}</label>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro button(label, id, type) %}
+<div class="md-group">      
+    <button class="md-button md-button__{{type}}" id="{{id}}" name="{{id}}" type="submit">{{label}}</button>
+</div>
+{% endmacro %}
+
+
+{% macro link(label, id, href, type) %}
+<div class="md-group">      
+    <div class="md-link md-link__{{type}}" id="{{id}}">
+        <a class="md-link__label" href="{{href}}">{{label}}</a>
+    </div>
+</div>
+{% endmacro %}
+
+
+{% macro checkbox(label, id, value) %}
+<div class="md-group">      
+    <div class="md-checkbox">
+        <input autocomplete="off" id="{{id}}" name="{{id}}" type="checkbox" value="{{value}}">
+        <label for="{{id}}">{{label}}</label>
+    </div>
+</div>
+{% endmacro %}

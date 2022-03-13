@@ -1,0 +1,65 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import text, password, link, button, checkbox %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+
+    <title>Login - ABC Bank</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/login.css') }}">
+
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section>
+            <div class="container">
+                <img src="{{ url_for('static', filename='img/assets/login.jpg') }}" />
+
+                <form id="form" method="POST" action="{{ url_for('auth.log_in') }}">
+                    <div>
+                        {{ form.csrf_token }}
+
+                        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}" />
+                    </div>
+
+                    <div class="fields-wrapper">
+                        {{ form.type }}
+                        
+                        <!-- User name -->
+                        {{ text("Username", "username", "user", "true") }}
+
+                        <!-- Password -->
+                        {{ password("Password", "password", "lock", "true") }}
+                        
+                        <!-- Forgot password -->
+                        {{ link("Forgot password", "forgotPassword", "#", "text") }}
+                        
+                        <!-- Remember me -->
+                        {{ checkbox("Stay signed in", "remember", "y") }}
+
+                        <!-- Recaptcha -->
+                        {{ form.recaptcha }}
+                        
+                        <!-- Login Button -->
+                        {{ button("Login", "login-button", "filled") }}
+                    </div>
+                </form>
+            </div>
+        </section>      
+    </main>
+    
+    {{ jsfiles() }}
+    
+</body>
+</html>

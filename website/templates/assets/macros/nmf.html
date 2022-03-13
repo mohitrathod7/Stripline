@@ -1,0 +1,255 @@
+{% from "assets/components/forms.html" import text, button %}
+
+{% macro navbar(current_user) %}
+    <nav>
+        <ul>
+            <li>
+                <i class="fa fa-bars"></i>
+                <i class="fa fa-times"></i>
+
+                <a href="{{ url_for('/.home') }}" class="title">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172" style=" fill:#000000;">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g fill="#e74c3c">
+                                <path d="M85.92161,11.46667c-2.47903,0.03223 -4.65656,1.65408 -5.39739,4.02005l-24.08672,77.08646l-6.67396,-15.22917v-0.0112c-4.66788,-10.65559 -20.5079,-11.06571 -25.71042,-0.66067l-1.79167,3.59453h-10.79479c-2.06765,-0.02924 -3.99087,1.05709 -5.03322,2.843c-1.04236,1.78592 -1.04236,3.99474 0,5.78066c1.04236,1.78592 2.96558,2.87225 5.03322,2.843h14.33333c2.17174,0.00015 4.15718,-1.22667 5.12865,-3.16901l3.38177,-6.76354c1.21744,-2.43488 3.85643,-2.36529 4.94948,0.13438l12.82162,29.29375c0.95737,2.19331 3.17624,3.56136 5.56588,3.43165c2.38963,-0.12971 4.44739,-1.7299 5.16173,-4.01394l19.9211,-63.72734l9.02552,108.36224c0.2208,2.63463 2.2144,4.77675 4.82641,5.18596c2.61201,0.40921 5.1652,-1.02059 6.18115,-3.46148l27.18854,-65.27266h14.93802c2.0447,3.54154 5.82076,5.7261 9.91016,5.73333c6.33287,0 11.46667,-5.1338 11.46667,-11.46667c0,-6.33287 -5.1338,-11.46667 -11.46667,-11.46667c-4.09341,0.00324 -7.87465,2.18834 -9.92136,5.73333h-18.74531c-2.31586,-0.00173 -4.40541,1.38983 -5.29661,3.52734l-19.61875,47.07604l-9.50703,-114.15156c-0.25274,-2.99852 -2.78043,-5.29154 -5.78933,-5.25182z"></path>
+                            </g>
+                        </g>
+                    </svg>
+                    <h1>Stripline</h1>
+                </a>
+            </li>
+
+            <li>
+                <div class="search">
+                    <!-- Search Button -->
+                    <button class="search-button" type="submit"><i class="fa fa-search"></i></button>
+
+                    <!-- Search bar -->
+                    <input class="search-bar" type="text" placeholder="Search Doctors, Hospitals, Medicines and much more.">
+                </div>
+            </li>
+
+            <li>
+                {% if current_user.is_authenticated == False %}
+                    <a class="signup" href="{{ url_for('auth.sign_up') }}">Signup</a>
+                    <a class="login" href="{{ url_for('auth.log_in') }}">Login</a>
+                {% else %}
+                    <div class="loggedin">
+                        <span class="material-icons notification-bell">notifications</span>
+                        <img class="profile-pic disabled" src="{{ url_for('static', filename='img/avatar/m_1.png') }}">
+                        <div>
+                            <p style="font-weight: bold;">{{current_user.firstname}} {{current_user.lastname}}</p>
+                            <p style="font-size: 14px;">{{current_user.type}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="notifications" class="modal">
+                        <div class="modal-body">
+                            <ul>
+                                <li><p style="margin-left: unset;">No notifications</p></li>
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="dummyNav hide"></div>
+{% endmacro %}
+
+
+{% macro sideNav(current_user) %}
+    <div class="sideNav-wrapper">
+        <div class="sideNav" id="sideNav">
+            <ul>
+                <li class="sideNav-item">
+                    <i class="fa fa-pencil"></i>
+                    <a class="nav-link" href="#"><p>Blogs</p></a>
+                </li>
+
+                {% if current_user.is_authenticated == True %}
+                    {% if current_user.type.lower() == "doctor" %}
+                        <li class="sideNav-item">
+                            <i class="fa fa-user"></i>
+                            <a class="nav-link" href="{{ url_for('/doctor.patients') }}"><p>Patients</p></a>
+                        </li>
+
+                    {% elif current_user.type.lower() == "user"%}
+                        <li class="sideNav-item active">
+                            <i class="fa fa-user"></i>
+                            <a class="nav-link" href="{{ url_for('/doctor.home') }}"><p>Doctors</p></a>
+                        </li>
+                    {% endif %}
+
+                {% elif current_user.is_authenticated == False %}
+                    <li class="sideNav-item active">
+                        <i class="fa fa-user"></i>
+                        <a class="nav-link" href="{{ url_for('/doctor.home') }}"><p>Doctors</p></a>
+                    </li>
+                {% endif %}
+                
+                <li class="sideNav-item">
+                    <i class="fa fa-building"></i>
+                    <a class="nav-link" href="{{ url_for('/hospitals.home') }}"><p>Hospitals</p></a>
+                </li>
+                
+                <li class="sideNav-item">
+                    <i class="fa fa-briefcase"></i>
+                    <a class="nav-link" href="#"><p>Shop</p></a>
+                </li>
+        
+                <li class="sideNav-item">
+                    <i class="fa fa-key"></i>
+                    <a class="nav-link" href="#"><p>Terms &amp; Conditions</p></a>
+                </li>
+                
+                {% if current_user.is_authenticated == False %}
+                    <li class="sideNav-item">
+                        <i class="fa fa-sign-out"></i>
+                        <a class="signup" href="{{ url_for('auth.sign_up') }}">Signup</a>
+                    </li>
+                    
+                    <li class="sideNav-item">
+                        <i class="fa fa-sign-out"></i>
+                        <a class="login" href="{{ url_for('auth.log_in') }}">Login</a>
+                    </li>   
+                {% else %}
+                    <li class="sideNav-item">
+                        <i class="fa fa-sign-out"></i>
+                        <a class="nav-link" href="{{ url_for('auth.log_out') }}"><p>Log out</p></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro footer() %}
+<div class="menu-wrapper">
+    <div class="menu">
+        <div class="menu-list accordion">
+            <h5 class="label acc-label">Popular Products</h5>       
+            <span class="material-icons md-light">expand_more</span>
+        </div>
+        
+        <ul class="panel">
+            <li><a href="#" target="_self">Savings Accounts</a></li>
+            
+            <li><a href="#" target="_self">Women's Accounts</a></li>
+            
+            <li><a href="#" target="_self">Senior Citizen Account</a></li>
+
+            <li><a href="#" target="_self">Current Accounts</a></li>
+            
+            <li><a href="#" target="_self">Credit Cards</a></li>
+            
+            <li><a href="#" target="_self">Home Loan</a></li>
+            
+            <li><a href="#" target="_self">Personal Loan</a></li>
+            
+            <li><a href="#" target="_self">Car Loan</a></li>
+            
+            <li><a href="#" target="_self">Gold Loan</a></li>
+            
+            <li><a href="#" target="_self">Fixed Deposit</a></li>
+            
+            <li><a href="#" target="_self">Recurring Deposit</a></li>
+            
+            <li><a href="#" target="_self">Life Insurance</a></li>
+            
+            <li><a href="#" target="_self">General Insurance</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <div class="menu-list accordion">
+            <h5 class="label acc-label">CALCULATORS</h5>
+            <span class="material-icons md-light">expand_more</span>
+        </div>
+
+        <ul class="panel">
+            <li><a href="#" target="_self">Personal Loan EMI Calculator</a></li>
+            <li><a href="#" target="_self">Car Loan EMI Calculator</a></li>
+            <li><a href="#" target="_self">Two Wheeler EMI Calculator</a></li>
+            <li><a href="#" target="_self">Home Loan EMI Calculator</a></li>
+            <li><a href="#" target="_self">Recurring Deposit EMI Calculator</a></li>
+            <li><a href="#" target="_self">Fixed Deposit EMI Calculator</a></li>
+            <li><a href="#" target="_self">More Calculators</a></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <div class="accordion">
+            <h5 class="label acc-label">Rates and Charges</h5>
+            <span class="material-icons md-light">expand_more</span>
+        </div>
+
+        <ul class="panel">
+            <li><a href="#" target="_self">Interest Rates</a></li>
+            <li><a href="#" target="_self">Gold Rate Today</a></li>
+            <li><a href="#" target="_self">Service Charges and Fees</a></li>
+        </ul>
+    </div>
+
+    <div class="menu social-media-links">
+        <div class="accordion">
+            <h5 class="label">Get Social</h5>
+        </div>
+
+        <ul class="panel">
+            <li><i class="fa fa-facebook"></i></li>
+            <li><i class="fa fa-twitter"></i></li>
+            <li><i class="fa fa-linkedin"></i></li>
+            <li><i class="fa fa-youtube"></i></li>
+        </ul>
+    </div>
+
+    <div class="menu download-links">
+        <div class="accordion">
+            <h5 class="label">Download ABC Bank</h5>
+        </div>
+
+        <ul class="panel" style="display: flex;">
+            <li style="margin-right: 10px;"><img src="{{ url_for('static', filename='img/assets/google_play.png') }}"></li>
+            <li><img src="{{ url_for('static', filename='img/assets/app_store.png') }}"></li>
+        </ul>
+    </div>
+
+    <div class="menu">
+        <div class="menu-list accordion">
+            <h5 class="label acc-label">Statutory Links</h5>
+            <span class="material-icons md-light">expand_more</span>
+        </div>
+
+        <ul class="panel">
+            <li><a href="#" target="_self">Terms &amp; Conditions</a></li>
+
+            <li><a href="#" target="_self">Do Not Call Registry</a></li>
+
+            <li><a href="#" target="_self">Disclaimer</a></li>
+
+            <li><a href="#" target="_self">Multilingual Disclaimer</a></li>
+
+            <li><a href="#" target="_self">Code of Commitment</a></li>
+
+            <li><a href="#" target="_self">Group Code of Business Conduct and Ethics</a></li>
+
+            <li><a href="#" target="_self">Customer Service Policies</a></li>
+
+            <li><a href="#" target="_self">Use of Unparliamentary Language by Customers</a></li>
+
+            <li><a href="#" target="_self">Privacy</a></li>
+
+            <li><a href="#" target="_self">Fair Practice Code for Lenders</a></li>
+        </ul>
+    </div>
+
+    <div class="menu copy-right">
+        <p>Copyright© 2022 | All rights Reserved</p>
+    </div>
+</div>
+{% endmacro %}
