@@ -1,0 +1,54 @@
+.sideNav{
+    background: var(--bg--secondary);
+    color: var(--cl--primary-text);
+    height: -webkit-fill-available; 
+    width: 0;
+    position: fixed; 
+    z-index: 10; 
+    left: 0;
+    overflow-x: hidden; 
+    transition: 0.5s all ease-in-out; 
+    box-shadow: 0px 6px 5px 5px rgb(0 0 0 / 20%)
+}
+
+.sideNav ul{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.sideNav .sideNav-item{
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sideNav .sideNav-item:hover{
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.sideNav .sideNav-item.active{
+    background: rgba(0, 0, 0, 0.15);
+    border-left: 5px solid gray;
+    padding-left: 15px;
+}
+
+.sideNav .sideNav-item .fa{
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    width: 25px;
+    font-size: 20px;
+}
+
+.sideNav .sideNav-item a{
+    color: var(--pri-text);
+}
+
+@media screen and (max-width: 600px) {
+    .sideNav{
+        min-width: unset;
+        max-width: 60%;
+    }
+}

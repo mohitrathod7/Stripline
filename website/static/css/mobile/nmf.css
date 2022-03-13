@@ -1,0 +1,13 @@
+@media screen and (max-width: 600px) {
+    nav{
+        padding: 10px 20px;
+    }
+
+    nav ul li .signup, nav ul li .login{
+        display: none;
+    }
+
+    .dummyNav{
+        height: 48px;
+    }
+}
