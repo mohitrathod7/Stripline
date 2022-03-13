@@ -1,0 +1,107 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import link %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+    
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/doctorProfile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/doctorProfile.css') }}">
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section class="services">
+            <h3>{{ doctor.firstname }} {{ doctor.lastname }}</h3>
+
+            <div class="content">
+                <section class="profile"> 
+                    <article class="doctor-card">
+                        <section class="left">
+                            <img src="{{ url_for('static', filename='img/assets/doctor.jfif') }}" height="100" width="100" alt="Profile picture of doctor">
+                        </section>
+                    </article>
+                </section>
+                
+                <section class="info">    
+                    <div id="about">
+                        <div class="label-data">
+                            <div class="label-data-item">
+                                <i class="fa fa-user"></i>
+                                <span>
+                                    <h2>1.2 K</h2>
+                                    <h4>Patients</h4>
+                                </span>
+                            </div>
+
+                            <div class="label-data-item">
+                                <i class="fa fa-hourglass"></i>
+                                <span>
+                                    <h2>9 Years</h2>
+                                    <h4>Experience</h4>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="time">
+                        <div class="label-data">
+                            <div class="label-data-item">
+                                <h4>Mon - Fri</h4>
+                                <h4>08:00 AM - 09:00 PM</h4>
+                            </div>
+
+                            <div class="label-data-item">
+                                <address>
+                                    <i class="fa fa-phone"><a href="tel:+919800000900"><h4>+91 9800000900 </h4></a></i>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+              
+                    <div id="address">
+                        <div class="label-data">
+                            <div class="label-data-item">
+                                <i class="fa fa-map-pin"></i>
+                                <address>
+                                    <h4>Swami Satyanand Maharaj Road, near Maxus Mall, Bhayandar West, Mira Bhayandar, Maharashtra 401101</h4>
+                                    <a style="color: var(--error);" target="_blank"
+                                       href="https://www.google.com/maps/place/Tembha+Hospital/@19.2979695,72.8345816,15z/data=!4m5!3m4!1s0x3be7b1cc51ce7343:0x95e7e3b76ab73392!8m2!3d19.2974719!4d72.8481172">
+                                       <u>View on maps</u>
+                                    </a>
+                                </address>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </section>
+        
+        <!-- Book appointment button -->
+        <div class="book-button-container">
+            <div class="book-button">
+                <a href="{{ doctor.username }}/appointment">Book Appointment</a>
+            </div>
+        </div>
+    </main>
+
+    {{ jsfiles() }}
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import link %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+    
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hospitals.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/hospitals.css') }}">
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section class="services">
+            <h3>Hospitals</h3>
+
+            <div class="hospitals">
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/assets/hospital.webp') }}" alt="Avatar" style="width:100%">
+
+                    <div class="info">
+                        <h4><b>Lifeline Hospital</b></h4>
+                        <p>Rao Saheb, Achutrao Patwardhan Marg, Four Bungalows, Andheri West, Mumbai, Maharashtra 400053</p>
+                        <i class="fa fa-globe">www.lifelinehospital.com</i><br>
+                        <i class="fa fa-phone">02242696969</i>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/assets/hospital.webp') }}" alt="Avatar" style="width:100%">
+
+                    <div class="info">
+                        <h4><b>Jeevan Jyoti Hospital</b></h4>
+                        <p>Near Petrol Pump, Marol Naka, Andheri Kurla Road, Andheri East, Mumbai, Maharashtra 400059</p>
+                        <i class="fa fa-globe">www.jeevanjyotihospital.com</i><br>
+                        <i class="fa fa-phone">02242690069</i>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <img src="{{ url_for('static', filename='img/assets/hospital.webp') }}" alt="Avatar" style="width:100%">
+
+                    <div class="info">
+                        <h4><b>Paramount Hospital</b></h4>
+                        <p>Saki Naka, Andheri East, Mumbai, Maharashtra 400059</p>
+                        <i class="fa fa-globe">www.paramounthospital.com</i><br>
+                        <i class="fa fa-phone">02242690022</i>
+                    </div>
+                </div>
+            </div>
+        </section>      
+    </main>
+
+    {{ jsfiles() }}
+
+</body>
+</html>

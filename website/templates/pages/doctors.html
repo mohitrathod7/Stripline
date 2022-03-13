@@ -1,0 +1,78 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import link %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+    
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/assets/DoctorCard.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/DoctorCard.css') }}">
+
+    <style>
+        
+    </style>
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section class="services">
+            <h3>Doctors</h3>
+
+            <div class="doctors">                
+                {% for doctor in doctors %}
+                    <article class="doctor-card">
+                        <section class="left">
+                            <img src="{{ url_for('static', filename='img/assets/doctor.jfif') }}" height="100" width="100" alt="Profile picture of doctor">
+                    
+                            <a class="view-profile-left" href="{{ doctor.username }}">View Profile</a>
+                        </section>
+                    
+                        <section class="right">
+                            <div class="name">
+                                <h3>{{ doctor.firstname }} {{ doctor.lastname }}</h3>
+                                <p>Dental Surgeon</p>
+                            </div>
+                    
+                            <div class="rating">
+                                <div class="rate">
+                                    <p style="margin-right: 5px;">4.6</p>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                    
+                                <div class="rate-count">
+                                    <p>54 ratings</p>
+                                </div>
+                            </div>
+                    
+                            <div class="speciality">
+                                <p>Dentistry</p>
+                                <p>Surgery</p>
+                                <p>Implantology</p>
+                                <p>Paediatric</p>
+                                <p>Surgery</p>
+                            </div>
+                    
+                            <a class="view-profile-right" href="{{ doctor.username }}">View Profile</a>
+                        </section>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>      
+    </main>
+
+    {{ jsfiles() }}
+
+</body>
+</html>

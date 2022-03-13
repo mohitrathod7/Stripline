@@ -1,0 +1,46 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import link %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+    
+    <title>Home</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/home.css') }}">
+
+    <style>
+        .container{
+            flex-direction: column !important;
+        }
+    </style>
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section class="services">
+            <h3>Flask Google Maps Example</h3>
+
+            <div class="row container">                
+            
+            </div>
+        </section>      
+    </main>
+    
+    <footer>
+        {{ footer() }}
+    </footer>
+
+    {{ jsfiles() }}
+
+</body>
+</html>
