@@ -1,0 +1,71 @@
+{% from "assets/macros/links.html" import links, header, cssfiles, jsfiles %}
+{% from "assets/macros/nmf.html" import navbar, sideNav, footer %}
+{% from "assets/components/forms.html" import text, password, link, button, checkbox %}
+{% from "assets/components/flashes.html" import flashSuccess, flashError, flashInfo %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>   
+    {{ links()}}
+
+    {{ cssfiles() }}
+
+    <title>Signup - ABC Bank</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile/signup.css') }}">
+
+    <style>
+        .container{
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <header>       
+        {{ header(navbar, current_user, sideNav, flashSuccess, flashError, flashInfo) }}
+    </header>
+    
+    <main>
+        <section>
+            <div class="container">
+                <form id="form" method="POST" action="{{ url_for('auth.sign_up') }}">
+                    <div>
+                        {{ form.csrf_token }}
+
+                        <input type="hidden" name="next" value="{{ request.args.get('next', '') }}" />
+                    </div>
+
+                    <div class="fields-wrapper">
+                        {{ form.type }}
+                        
+                        <!-- User name -->
+                        {{ text("Username", "username", "user", "true") }}
+
+                        <!-- First name -->
+                        {{ text("First name", "firstname", "user", "true") }}
+
+                        <!-- Middle name -->
+                        {{ text("Middle name", "middlename", "user", "true") }}
+
+                        <!-- Last name -->
+                        {{ text("Last name", "lastname", "user", "true") }}
+
+                        <!-- Password -->
+                        {{ password("Password", "password", "lock", "true") }}
+                        
+                        <!-- Profile picture -->
+                        {{ text("Profile picture", "profile", "user", "true") }}
+
+                        <!-- Signup Button -->
+                        {{ button("Signup", "login-button", "filled") }}
+                    </div>
+                </form>
+            </div>
+        </section>      
+    </main>
+
+    {{ jsfiles() }}
+    
+</body>
+</html>
