@@ -32,11 +32,7 @@
 
             <div class="content">
                 <section class="profile"> 
-                    <article class="doctor-card">
-                        <section class="left">
-                            <img src="{{ url_for('static', filename='img/assets/doctor.jfif') }}" height="100" width="100" alt="Profile picture of doctor">
-                        </section>
-                    </article>
+                    <img src="{{ url_for('static', filename='img/assets/doctor.jfif') }}" height="100" width="100" alt="Profile picture of doctor">
                 </section>
                 
                 <section class="info">    
@@ -93,7 +89,6 @@
             </div>
         </section>
         
-        <!-- Book appointment button -->
         <div class="book-button-container">
             <div class="book-button">
                 <a href="{{ doctor.username }}/appointment">Book Appointment</a>
