@@ -3,13 +3,6 @@
     flex-direction: row;
 }
 
-.container{
-    padding: 61px 0;
-    margin: 0 auto;
-    display: flex;
-    max-width: 1000px;
-}
-
 .profile{
     display: flex;
     flex-direction: column;
@@ -19,14 +12,21 @@
     width: 25%;
 }
 
+.profile img{
+    margin: auto;
+    height: 150px !important;
+    width: 150px !important;
+}
+
 .info{
     margin: 0 0 0 15px;
+    padding: 15px;
     display: flex;
+    background: var(--bg--secondary);
     flex-direction: column;
-    height: 400px;
     width: 75%;
-    box-shadow: 0 0 5px 0 var(--boxShadow);
-    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
     overflow-y: scroll;
 }
 
@@ -40,30 +40,20 @@
     margin-bottom: 0;
 }
 
-
-/* --------------------------------------- */
-
-.info #about{   
-    color: hsl(248, 20%, 16%);
-    background: #7561ff;
+#about{   
+    color: #7561ff;
 }
 
-.info #about .label-data-item{
-    color: var(--blue-alt);
-}
-
-.info #time{
-    color: hsl(267, 20%, 16%);
-    background: hsl(220, 20%, 30%);
+#time{
+    color: var(--cl--secondary-text);
 }
 
 .info #time .label-data-item h4:nth-child(2){
     margin-left: 10px;
 }
 
-.info #address{
-    background: #b56576;
-    color: hsl(346, 20%, 16%);
+.info #address{ 
+    color: var(--cl--error);
 }
 
 .info .label-data{
@@ -95,44 +85,6 @@
     font-size: 30px !important;
 }
 
-
-/* ------------- Doctor Card ------------- */
-
-.doctor-card{
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.doctor-card img{
-    margin: auto;
-    height: 150px !important;
-    width: 150px !important;
-}
-
-.doctor-card .name{
-    padding-bottom: 15px !important;
-    text-align: center;
-}
-
-.doctor-card .name p{
-    margin-top: 5px;
-}
-
-.doctor-card .rating{
-    padding-bottom: 15px !important;
-    justify-content: center;
-}
-
-.doctor-card .speciality p{
-    margin: 0 15px 15px 0 !important;
-}
-
-.doctor-card .view-profile-left, .doctor-card .view-profile-right{
-    display: none !important;
-}
-
-
 /* ------------- Appointment button ------------- */
 
 .book-button-container{
@@ -140,13 +92,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 36px;
+    height: 34px;
     width: -webkit-fill-available;
     bottom: 34px;
 }
                 
 .book-button{
-    padding: 4px;
+    padding: 6px;
     width: 160px;
     text-align: center;
     background: hsl(136, 20%, 16%);
@@ -165,6 +117,8 @@
     cursor: pointer;
 }
 
+
+/* ------------- Responsive for mobile ------------- */
 
 @media screen and (max-width: 600px){
     .content{
