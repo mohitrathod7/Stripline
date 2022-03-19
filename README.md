@@ -3,6 +3,10 @@ Stripline is a tech platform where Users can find and book appointment with thei
 Buy medicines, book appointments in hospitals and labs.
 
 
+## View project
+[Click here](https://devpost.com/software/stripline-platform-for-healthcare)
+
+
 ## How I built it
 1. Designed UI.
 2. Created frontend and animations.
